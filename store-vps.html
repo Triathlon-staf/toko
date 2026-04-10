@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store VPS - Aurevion Cloud</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { dark: '#0f172a', card: '#1e293b', blue: '#3b82f6', purple: '#8b5cf6', accent: '#06b6d4' }
+                    },
+                    fontFamily: { sans: ['Outfit', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-dark text-slate-100 antialiased min-h-screen">
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 top-0 border-b border-white/10 bg-brand-dark/90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between p-4">
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <img src="https://i.pinimg.com/1200x/fd/c3/bc/fdc3bc815b6e16a0942ad7d17edbfcf3.jpg" alt="Logo" class="h-8 w-auto object-contain rounded bg-white/5 p-1">
+                <span class="text-xl font-display font-bold text-white">Aurevion<span class="text-brand-blue">Cloud</span></span>
+            </a>
+            <div class="flex md:order-2">
+                <a href="store-mc.html" class="text-sm bg-brand-blue hover:bg-brand-blue/90 text-white px-4 py-2 rounded-lg transition-colors">
+                    <i class="fa-solid fa-cube mr-1"></i> Store MC
+                </a>
+            </div>
+            <div class="hidden w-full md:block md:w-auto md:order-1">
+                <ul class="flex p-4 mt-0 font-medium space-x-8">
+                    <li><a href="index.html" class="text-slate-400 hover:text-white">Beranda</a></li>
+                    <li><a href="store-mc.html" class="text-slate-400 hover:text-white">Store MC</a></li>
+                    <li><a href="store-vps.html" class="text-brand-blue">Store VPS</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="pt-24 pb-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-display font-bold text-white mb-4">Store VPS Hetzner</h1>
+                <p class="text-slate-400">Performa tinggi dengan AMD Epyc Genoa & Milan.</p>
+            </div>
+
+            <!-- GRID VPS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                
+                <!-- VPS 1 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-6 hover:border-brand-blue transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-blue/10 p-3 rounded-bl-xl group-hover:bg-brand-blue/20 transition-colors">
+                        <i class="fa-brands fa-linux text-2xl text-brand-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Amd Epyc Genoa</h3>
+                    <p class="text-brand-accent font-medium mb-4 text-lg">2gb</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-center"><i class="fa-solid fa-microchip w-5 text-brand-purple"></i> 100vCPU / 1 Core</li>
+                        <li class="flex items-center"><i class="fa-solid fa-hard-drive w-5 text-brand-purple"></i> 40GB SSD</li>
+                        <li class="flex items-center"><i class="fa-solid fa-globe w-5 text-brand-purple"></i> 0,5 TB Bandwidth</li>
+                    </ul>
+                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                        <span class="text-2xl font-display font-bold text-white">Rp60.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20VPS%20Genoa%202GB.%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Order WA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VPS 2 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-6 hover:border-brand-blue transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-blue/10 p-3 rounded-bl-xl group-hover:bg-brand-blue/20 transition-colors">
+                        <i class="fa-brands fa-linux text-2xl text-brand-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Amd Epyc Genoa</h3>
+                    <p class="text-brand-accent font-medium mb-4 text-lg">4gb</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-center"><i class="fa-solid fa-microchip w-5 text-brand-purple"></i> 200vCPU / 2 Core</li>
+                        <li class="flex items-center"><i class="fa-solid fa-hard-drive w-5 text-brand-purple"></i> 80GB SSD</li>
+                        <li class="flex items-center"><i class="fa-solid fa-globe w-5 text-brand-purple"></i> 1 TB Bandwidth</li>
+                    </ul>
+                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                        <span class="text-2xl font-display font-bold text-white">Rp80.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20VPS%20Genoa%204GB.%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Order WA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VPS 3 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-6 hover:border-brand-blue transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-blue/10 p-3 rounded-bl-xl group-hover:bg-brand-blue/20 transition-colors">
+                        <i class="fa-brands fa-linux text-2xl text-brand-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Amd Epyc Genoa</h3>
+                    <p class="text-brand-accent font-medium mb-4 text-lg">8gb</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-center"><i class="fa-solid fa-microchip w-5 text-brand-purple"></i> 400vCPU / 4 Core</li>
+                        <li class="flex items-center"><i class="fa-solid fa-hard-drive w-5 text-brand-purple"></i> 16GB SSD</li>
+                        <li class="flex items-center"><i class="fa-solid fa-globe w-5 text-brand-purple"></i> 2 TB Bandwidth</li>
+                    </ul>
+                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                        <span class="text-2xl font-display font-bold text-white">Rp95.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20VPS%20Genoa%208GB.%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Order WA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VPS 4 (Milan) -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-6 hover:border-brand-purple transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-purple/10 p-3 rounded-bl-xl group-hover:bg-brand-purple/20 transition-colors">
+                        <i class="fa-brands fa-linux text-2xl text-brand-purple"></i>
+                    </div>
+                    <span class="inline-block bg-brand-purple/20 text-brand-purple text-xs px-2 py-0.5 rounded mb-2">Milan Series</span>
+                    <h3 class="text-xl font-bold text-white mb-1">Amd Epyc Milan</h3>
+                    <p class="text-brand-accent font-medium mb-4 text-lg">16gb</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-center"><i class="fa-solid fa-microchip w-5 text-brand-purple"></i> 400vCPU / 4 Core</li>
+                        <li class="flex items-center"><i class="fa-solid fa-hard-drive w-5 text-brand-purple"></i> 160GB SSD</li>
+                        <li class="flex items-center"><i class="fa-solid fa-globe w-5 text-brand-purple"></i> 2 TB Bandwidth</li>
+                    </ul>
+                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                        <span class="text-2xl font-display font-bold text-white">Rp105.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20VPS%20Milan%2016GB.%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Order WA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VPS 5 (Genoa 16GB) -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-6 hover:border-brand-blue transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-blue/10 p-3 rounded-bl-xl group-hover:bg-brand-blue/20 transition-colors">
+                        <i class="fa-brands fa-linux text-2xl text-brand-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Amd Epyc Genoa</h3>
+                    <p class="text-brand-accent font-medium mb-4 text-lg">16gb</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-center"><i class="fa-solid fa-microchip w-5 text-brand-purple"></i> 800vCPU / 8 Core</li>
+                        <li class="flex items-center"><i class="fa-solid fa-hard-drive w-5 text-brand-purple"></i> 320GB SSD</li>
+                        <li class="flex items-center"><i class="fa-solid fa-globe w-5 text-brand-purple"></i> 3 TB Bandwidth</li>
+                    </ul>
+                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                        <span class="text-2xl font-display font-bold text-white">Rp110.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20VPS%20Genoa%2016GB.%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Order WA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VPS 6 (Milan 32GB) -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-6 hover:border-brand-purple transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-purple/10 p-3 rounded-bl-xl group-hover:bg-brand-purple/20 transition-colors">
+                        <i class="fa-brands fa-linux text-2xl text-brand-purple"></i>
+                    </div>
+                    <span class="inline-block bg-brand-purple/20 text-brand-purple text-xs px-2 py-0.5 rounded mb-2">Milan Series</span>
+                    <h3 class="text-xl font-bold text-white mb-1">Amd Epyc Milan</h3>
+                    <p class="text-brand-accent font-medium mb-4 text-lg">32gb</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-center"><i class="fa-solid fa-microchip w-5 text-brand-purple"></i> 800vCPU / 8 Core</li>
+                        <li class="flex items-center"><i class="fa-solid fa-hard-drive w-5 text-brand-purple"></i> 240GB SSD</li>
+                        <li class="flex items-center"><i class="fa-solid fa-globe w-5 text-brand-purple"></i> 3 TB Bandwidth</li>
+                    </ul>
+                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                        <span class="text-2xl font-display font-bold text-white">Rp125.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20VPS%20Milan%2032GB.%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Order WA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VPS 7 (Genoa 32GB) -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-6 hover:border-brand-blue transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-blue/10 p-3 rounded-bl-xl group-hover:bg-brand-blue/20 transition-colors">
+                        <i class="fa-brands fa-linux text-2xl text-brand-blue"></i>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-xl font-bold text-white mb-1">Amd Epyc Genoa</h3>
+                        <span class="bg-brand-blue/20 text-brand-blue text-xs px-2 py-1 rounded">Value</span>
+                    </div>
+                    <p class="text-brand-accent font-medium mb-4 text-lg">32gb</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-center"><i class="fa-solid fa-microchip w-5 text-brand-purple"></i> 1600vCPU / 16 Core</li>
+                        <li class="flex items-center"><i class="fa-solid fa-hard-drive w-5 text-brand-purple"></i> 680GB SSD</li>
+                        <li class="flex items-center"><i class="fa-solid fa-globe w-5 text-brand-purple"></i> 5 TB Bandwidth</li>
+                    </ul>
+                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                        <span class="text-2xl font-display font-bold text-white">Rp135.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20VPS%20Genoa%2032GB.%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Order WA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VPS 8 (Milan 64GB) -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-6 hover:border-brand-purple transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-purple/10 p-3 rounded-bl-xl group-hover:bg-brand-purple/20 transition-colors">
+                        <i class="fa-brands fa-linux text-2xl text-brand-purple"></i>
+                    </div>
+                    <span class="inline-block bg-brand-purple/20 text-brand-purple text-xs px-2 py-0.5 rounded mb-2">Milan Series</span>
+                    <h3 class="text-xl font-bold text-white mb-1">Amd Epyc Milan</h3>
+                    <p class="text-brand-accent font-medium mb-4 text-lg">64gb</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-center"><i class="fa-solid fa-microchip w-5 text-brand-purple"></i> 800vCPU / 8 Core</li>
+                        <li class="flex items-center"><i class="fa-solid fa-hard-drive w-5 text-brand-purple"></i> 320GB SSD</li>
+                        <li class="flex items-center"><i class="fa-solid fa-globe w-5 text-brand-purple"></i> 4 TB Bandwidth</li>
+                    </ul>
+                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                        <span class="text-2xl font-display font-bold text-white">Rp145.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20VPS%20Milan%2064GB.%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Order WA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VPS 9 (Milan 128GB) -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-6 hover:border-brand-purple transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-brand-purple/10 p-3 rounded-bl-xl group-hover:bg-brand-purple/20 transition-colors">
+                        <i class="fa-brands fa-linux text-2xl text-brand-purple"></i>
+                    </div>
+                    <span class="inline-block bg-brand-purple/20 text-brand-purple text-xs px-2 py-0.5 rounded mb-2">Milan Series</span>
+                    <h3 class="text-xl font-bold text-white mb-1">Amd Epyc Milan</h3>
+                    <p class="text-brand-accent font-medium mb-4 text-lg">128gb</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-center"><i class="fa-solid fa-microchip w-5 text-brand-purple"></i> 3200vCPU / 32 Core</li>
+                        <li class="flex items-center"><i class="fa-solid fa-hard-drive w-5 text-brand-purple"></i> 600GB SSD</li>
+                        <li class="flex items-center"><i class="fa-solid fa-globe w-5 text-brand-purple"></i> 6 TB Bandwidth</li>
+                    </ul>
+                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                        <span class="text-2xl font-display font-bold text-white">Rp175.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20VPS%20Milan%20128GB.%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Order WA
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VPS 10 (Milan 192GB) -->
+                <div class="bg-brand-card/40 border border-brand-purple/50 shadow-[0_0_15px_rgba(139,92,246,0.3)] rounded-xl p-6 relative overflow-hidden group transform md:col-span-2 lg:col-span-1">
+                    <div class="absolute top-0 right-0 bg-brand-purple p-3 rounded-bl-xl">
+                        <i class="fa-solid fa-crown text-2xl text-white"></i>
+                    </div>
+                    <span class="inline-block bg-brand-purple text-white text-xs px-2 py-0.5 rounded mb-2 font-bold">ULTIMATE</span>
+                    <h3 class="text-xl font-bold text-white mb-1">Amd Epyc Milan</h3>
+                    <p class="text-brand-accent font-medium mb-4 text-lg">192gb</p>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-center"><i class="fa-solid fa-microchip w-5 text-brand-purple"></i> 4800vCPU / 48 Core</li>
+                        <li class="flex items-center"><i class="fa-solid fa-hard-drive w-5 text-brand-purple"></i> 960GB SSD</li>
+                        <li class="flex items-center"><i class="fa-solid fa-globe w-5 text-brand-purple"></i> 8 TB Bandwidth</li>
+                    </ul>
+                    <div class="flex items-center justify-between border-t border-white/10 pt-4">
+                        <span class="text-2xl font-display font-bold text-white">Rp225.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20VPS%20Milan%20192GB.%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+                            Order WA
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BONUS SECTION -->
+            <div class="bg-gradient-to-r from-brand-blue/10 to-brand-purple/10 border border-brand-blue/20 rounded-2xl p-8">
+                <h2 class="text-2xl font-display font-bold text-white mb-6 flex items-center">
+                    <i class="fa-solid fa-gift text-brand-purple mr-3"></i> Bonus Pembelian VPS
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="flex items-start">
+                        <div class="bg-brand-blue/20 p-2 rounded-lg mr-3 mt-1">
+                            <i class="fa-solid fa-server text-brand-blue"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white">Free Install Panel</h4>
+                            <p class="text-sm text-slate-400">Gratis Install Pterodactyl Panel & Node/Wings</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-brand-blue/20 p-2 rounded-lg mr-3 mt-1">
+                            <i class="fa-solid fa-globe text-brand-blue"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white">Free Subdomain & OS</h4>
+                            <p class="text-sm text-slate-400">Request Subdomain gratis & Install OS sesuka hati</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-brand-blue/20 p-2 rounded-lg mr-3 mt-1">
+                            <i class="fa-brands fa-whatsapp text-brand-blue"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white">Free Egg Bot WA</h4>
+                            <p class="text-sm text-slate-400">Dapatkan Egg Bot WhatsApp untuk keperluan Anda</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start md:col-span-2 lg:col-span-3 bg-white/5 p-4 rounded-lg border border-white/5">
+                        <div class="bg-brand-purple/20 p-2 rounded-lg mr-3 mt-1">
+                            <i class="fa-solid fa-graduation-cap text-brand-purple"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-lg">Full Pengajaran</h4>
+                            <p class="text-sm text-slate-400">Kami akan mengajarkan cara menggunakan VPS dari nol sampai mahir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
