@@ -16,7 +16,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind Config (Sama persis dengan login.html) -->
+    <!-- Tailwind Config (Sama persis dengan sebelumnya) -->
     <script>
         tailwind.config = {
             theme: {
@@ -60,7 +60,7 @@
 </head>
 <body class="bg-brand-dark text-slate-100 antialiased relative min-h-screen">
 
-    <!-- BACKGROUND EFFECTS (Sama dengan Login) -->
+    <!-- BACKGROUND EFFECTS -->
     <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-blue/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob"></div>
         <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-purple/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
@@ -93,16 +93,16 @@
                     <li>
                         <a href="#home" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-brand-blue md:p-0" aria-current="page">Beranda</a>
                     </li>
+                    <!-- Link Layanan dicek saat diklik -->
                     <li>
-                        <a href="#store" class="block py-2 px-3 text-slate-300 rounded hover:bg-white/10 md:hover:bg-transparent md:hover:text-brand-blue md:p-0 transition-colors">Layanan</a>
+                        <a href="javascript:void(0)" onclick="protectRoute('store-vps.html'); return false;" class="block py-2 px-3 text-slate-300 rounded hover:bg-white/10 md:hover:bg-transparent md:hover:text-brand-blue md:p-0 transition-colors cursor-pointer">Layanan</a>
                     </li>
                     <li>
                         <a href="#pricing" class="block py-2 px-3 text-slate-300 rounded hover:bg-white/10 md:hover:bg-transparent md:hover:text-brand-blue md:p-0 transition-colors">Harga</a>
                     </li>
                     
-                    <!-- Dynamic Auth Section (Diisi oleh Javascript) -->
+                    <!-- Dynamic Auth Section -->
                     <li id="auth-container" class="flex items-center gap-3 mt-2 md:mt-0 pl-0 md:pl-4 border-l border-white/10 md:border-l-0">
-                        <!-- Default State (Loading) -->
                         <i class="fa-solid fa-circle-notch fa-spin text-brand-blue"></i>
                     </li>
                 </ul>
@@ -113,7 +113,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-brand-card/95 backdrop-blur-xl border-b border-white/10">
             <ul class="font-medium flex flex-col p-4 space-y-3">
                 <li><a href="#home" class="text-brand-blue block">Beranda</a></li>
-                <li><a href="#store" class="text-slate-300 hover:text-white block">Layanan</a></li>
+                <li><a href="javascript:void(0)" onclick="protectRoute('store-vps.html')" class="text-slate-300 hover:text-white block cursor-pointer">Layanan</a></li>
                 <li><a href="#pricing" class="text-slate-300 hover:text-white block">Harga</a></li>
                 <li id="mobile-auth-container" class="pt-4 border-t border-white/10 flex flex-col gap-2">
                     <!-- Mobile Auth Buttons -->
@@ -139,7 +139,8 @@
             </p>
             
             <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-                <a href="#store" class="inline-flex justify-center items-center py-3.5 px-8 text-base font-medium text-center text-white rounded-lg bg-gradient-to-r from-brand-blue to-brand-purple hover:from-brand-blue/90 hover:to-brand-purple/90 focus:ring-4 focus:ring-brand-purple/30 shadow-lg shadow-brand-purple/25 transition-all hover:-translate-y-1">
+                <!-- Tombol Mulai Sekarang diproteksi -->
+                <a href="javascript:void(0)" onclick="protectRoute('store-vps.html')" class="inline-flex justify-center items-center py-3.5 px-8 text-base font-medium text-center text-white rounded-lg bg-gradient-to-r from-brand-blue to-brand-purple hover:from-brand-blue/90 hover:to-brand-purple/90 focus:ring-4 focus:ring-brand-purple/30 shadow-lg shadow-brand-purple/25 transition-all hover:-translate-y-1 cursor-pointer">
                     Mulai Sekarang
                     <i class="fa-solid fa-rocket ml-2"></i>
                 </a>
@@ -148,7 +149,7 @@
                 </a>
             </div>
 
-            <!-- Dashboard Preview Mockup (CSS Only) -->
+            <!-- Dashboard Preview Mockup -->
             <div class="mx-auto max-w-5xl rounded-xl border border-white/10 bg-brand-card/50 backdrop-blur-sm shadow-2xl overflow-hidden relative group">
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent z-10 opacity-60"></div>
                 <!-- Mockup Header -->
@@ -167,7 +168,7 @@
         </div>
     </section>
 
-    <!-- STORE LINKS SECTION (KATEGORI) -->
+    <!-- STORE LINKS SECTION -->
     <section id="store" class="py-20 relative z-10">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -177,8 +178,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 
-                <!-- Link ke Store VPS -->
-                <a href="store-vps.html" class="group relative p-8 rounded-2xl bg-brand-card/60 border border-white/10 hover:border-brand-blue/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+                <!-- Link ke Store VPS (Diproteksi) -->
+                <a href="javascript:void(0)" onclick="protectRoute('store-vps.html'); return false;" class="group relative p-8 rounded-2xl bg-brand-card/60 border border-white/10 hover:border-brand-blue/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-pointer">
                     <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-blue/20 rounded-full blur-3xl group-hover:bg-brand-blue/30 transition-all"></div>
                     
                     <div class="flex flex-col items-start relative z-10">
@@ -193,8 +194,8 @@
                     </div>
                 </a>
 
-                <!-- Link ke Store MC -->
-                <a href="store-mc.html" class="group relative p-8 rounded-2xl bg-brand-card/60 border border-white/10 hover:border-brand-purple/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+                <!-- Link ke Store MC (Diproteksi) -->
+                <a href="javascript:void(0)" onclick="protectRoute('store-mc.html'); return false;" class="group relative p-8 rounded-2xl bg-brand-card/60 border border-white/10 hover:border-brand-purple/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-pointer">
                     <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-purple/20 rounded-full blur-3xl group-hover:bg-brand-purple/30 transition-all"></div>
                     
                     <div class="flex flex-col items-start relative z-10">
@@ -267,7 +268,8 @@
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 4 GB Storage</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Unlimited Bandwidth</li>
                     </ul>
-                    <a href="store-vps.html" class="w-full py-2 rounded-lg border border-white/20 text-center hover:bg-white/10 transition-colors block">Pilih</a>
+                    <!-- Tombol Pilih Diproteksi -->
+                    <a href="javascript:void(0)" onclick="protectRoute('store-vps.html'); return false;" class="w-full py-2 rounded-lg border border-white/20 text-center hover:bg-white/10 transition-colors block cursor-pointer">Pilih</a>
                 </div>
 
                 <!-- Basic (Popular) -->
@@ -284,7 +286,8 @@
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Unlimited Bandwidth</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Prioritas Support</li>
                     </ul>
-                    <a href="store-vps.html" class="w-full py-2 rounded-lg bg-brand-purple hover:bg-brand-purple/90 text-white text-center font-medium transition-colors block">Pilih</a>
+                    <!-- Tombol Pilih Diproteksi -->
+                    <a href="javascript:void(0)" onclick="protectRoute('store-vps.html'); return false;" class="w-full py-2 rounded-lg bg-brand-purple hover:bg-brand-purple/90 text-white text-center font-medium transition-colors block cursor-pointer">Pilih</a>
                 </div>
 
                 <!-- Pro -->
@@ -300,7 +303,8 @@
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 120% CPU Power</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Backup Mingguan</li>
                     </ul>
-                    <a href="store-vps.html" class="w-full py-2 rounded-lg border border-white/20 text-center hover:bg-white/10 transition-colors block">Pilih</a>
+                    <!-- Tombol Pilih Diproteksi -->
+                    <a href="javascript:void(0)" onclick="protectRoute('store-vps.html'); return false;" class="w-full py-2 rounded-lg border border-white/20 text-center hover:bg-white/10 transition-colors block cursor-pointer">Pilih</a>
                 </div>
 
                 <!-- Ultra -->
@@ -316,7 +320,8 @@
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 150% CPU Power</li>
                         <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Dedicated IP</li>
                     </ul>
-                    <a href="store-vps.html" class="w-full py-2 rounded-lg border border-white/20 text-center hover:bg-white/10 transition-colors block">Pilih</a>
+                    <!-- Tombol Pilih Diproteksi -->
+                    <a href="javascript:void(0)" onclick="protectRoute('store-vps.html'); return false;" class="w-full py-2 rounded-lg border border-white/20 text-center hover:bg-white/10 transition-colors block cursor-pointer">Pilih</a>
                 </div>
 
             </div>
@@ -339,8 +344,9 @@
                 <div>
                     <h4 class="text-white font-bold mb-4">Produk</h4>
                     <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="store-vps.html" class="hover:text-brand-blue transition-colors">Cloud VPS</a></li>
-                        <li><a href="store-mc.html" class="hover:text-brand-blue transition-colors">Minecraft Hosting</a></li>
+                        <!-- Footer links juga diproteksi -->
+                        <li><a href="javascript:void(0)" onclick="protectRoute('store-vps.html')" class="hover:text-brand-blue transition-colors cursor-pointer">Cloud VPS</a></li>
+                        <li><a href="javascript:void(0)" onclick="protectRoute('store-mc.html')" class="hover:text-brand-blue transition-colors cursor-pointer">Minecraft Hosting</a></li>
                         <li><a href="#" class="hover:text-brand-blue transition-colors">Dedicated Server</a></li>
                         <li><a href="#" class="hover:text-brand-blue transition-colors">Domain</a></li>
                     </ul>
@@ -376,7 +382,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
-        // Firebase Config (Sama dengan login.html)
+        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyDTPN4MXqk4L_zOxO1hK3bftHeehTLwB0g",
             authDomain: "login-dae4f.firebaseapp.com",
@@ -394,6 +400,22 @@
         const authContainer = document.getElementById('auth-container');
         const mobileAuthContainer = document.getElementById('mobile-auth-container');
 
+        // --- FUNGSI PROTEKSI LOGIN ---
+        // Fungsi ini dipasang ke window agar bisa dipanggil dari HTML onclick
+        window.protectRoute = (targetUrl) => {
+            const user = auth.currentUser;
+            
+            if (user) {
+                // Jika sudah login, lanjut ke URL tujuan
+                window.location.href = targetUrl;
+            } else {
+                // Jika belum login, arahkan ke login.html
+                // Kita tambahkan parameter 'redirect' agar setelah login user balik lagi ke sini
+                const currentUrl = encodeURIComponent(targetUrl);
+                window.location.href = `login.html?redirect=${currentUrl}`;
+            }
+        };
+
         // Fungsi Logout
         window.handleLogout = async () => {
             try {
@@ -401,7 +423,7 @@
                 window.location.href = "index.html";
             } catch (error) {
                 console.error("Logout Error:", error);
-                alert("Gagal logout");
+                // Tidak menggunakan alert native, tapi log ke console
             }
         };
 
