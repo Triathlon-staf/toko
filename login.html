@@ -113,7 +113,7 @@
                     <div class="space-y-1">
                         <div class="flex justify-between items-center ml-1">
                             <label class="text-xs font-medium text-slate-400">Password</label>
-                            <!-- Link Lupa Password (Sekarang ke register karena belum ada fitur reset pass) -->
+                            <!-- Link Lupa Password -->
                             <a href="#" onclick="switchTab('register'); alert('Fitur reset password belum tersedia. Silakan daftar ulang jika lupa.');" class="text-xs text-brand-blue hover:underline cursor-pointer">Lupa password?</a>
                         </div>
                         <div class="relative">
@@ -310,7 +310,7 @@
             }
 
             // Set Loading State
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Mendaftar...';
+            btn.innerHTML = <i class="fa-solid fa-circle-notch fa-spin"></i> Mendaftar...';
             btn.disabled = true;
             hideAlert();
 
