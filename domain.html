@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Store - Aurevion Cloud</title>
+  <link rel="icon" type="image/png" href="https://i.pinimg.com/1200x/fd/c3/bc/fdc3bc815b6e16a0942ad7d17edbfcf3.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts (Aurevion Style) -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Tailwind Config (Aurevion Theme) -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0f172a',
+              card: '#1e293b',
+              blue: '#3b82f6',
+              purple: '#8b5cf6',
+              accent: '#06b6d4'
+            }
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Background Effects */
+    .grid-bg {
+      position:fixed; inset:0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+      background-size:60px 60px; z-index:0; pointer-events:none;
+    }
+    .scanline { position:fixed; inset:0; z-index:1; pointer-events:none; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.025) 2px,rgba(0,0,0,0.025) 4px); }
+    
+    /* Orbs - Changed to Blue/Purple */
+    .orb { position:fixed; border-radius:50%; filter:blur(90px); pointer-events:none; z-index:0; animation:orbFloat 14s ease-in-out infinite alternate; }
+    .orb-1 { width:420px; height:420px; background:radial-gradient(circle,rgba(59,130,246,0.1),transparent 70%); top:-120px; left:-100px; }
+    .orb-2 { width:380px; height:380px; background:radial-gradient(circle,rgba(139,92,246,0.08),transparent 70%); bottom:5%; right:-100px; animation-delay:-5s; }
+    .orb-3 { width:220px; height:220px; background:radial-gradient(circle,rgba(6,196,203,0.08),transparent 70%); top:45%; left:30%; animation-delay:-9s; }
+    @keyframes orbFloat { 0%{transform:translate(0,0) scale(1)} 50%{transform:translate(25px,-35px) scale(1.08)} 100%{transform:translate(-15px,20px) scale(0.95)} }
+    
+    #particles { position:fixed; inset:0; z-index:0; pointer-events:none; }
+    .mouse-glow { position:fixed; width:450px; height:450px; border-radius:50%; background:radial-gradient(circle,rgba(59,130,246,0.06),transparent 60%); pointer-events:none; z-index:1; transform:translate(-50%,-50%); transition:left 0.35s ease-out, top 0.35s ease-out; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width:6px; }
+    ::-webkit-scrollbar-track { background:var(--bg); }
+    ::-webkit-scrollbar-thumb { background:#334155; border-radius:3px; }
+    ::-webkit-scrollbar-thumb:hover { background:#475569; }
+
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease-out, transform 0.7s ease-out; }
+    .reveal.vis { opacity:1; transform:translateY(0); }
+
+    /* Toast */
+    .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px); padding:14px 28px; border-radius:14px; background:var(--bg-card); border:1px solid rgba(59,130,246,0.3); color:var(--fg); font-size:0.88rem; z-index:200; box-shadow:0 12px 40px rgba(0,0,0,0.5); transition:transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s; opacity:0; display:flex; align-items:center; gap:10px; pointer-events:none; }
+    .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+    /* Chatbot Styles */
+    .chatbot-fab {
+      position:fixed; bottom:28px; right:28px; z-index:150;
+      width:56px; height:56px; border-radius:16px; border:none;
+      background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+      color:white; font-size:1.3rem; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 8px 30px rgba(59,130,246,0.3);
+      transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .chatbot-fab:hover { transform:scale(1.08); box-shadow:0 10px 40px rgba(59,130,246,0.4); }
+    .chatbot-fab.open { border-radius:14px; background:#1e293b; color:white; box-shadow:0 4px 20px rgba(0,0,0,0.4); }
+    .fab-pulse {
+      position:absolute; inset:-4px; border-radius:20px;
+      background:rgba(59,130,246,0.2);
+      animation:fabPulse 2.5s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes fabPulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.15);opacity:0} }
+    
+    .chatbot-window {
+      position:fixed; bottom:96px; right:28px; z-index:149;
+      width:400px; height:560px; max-height:calc(100vh - 140px);
+      background:#1e293b; border:1px solid #334155;
+      border-radius:20px; display:flex; flex-direction:column;
+      box-shadow:0 20px 60px rgba(0,0,0,0.6);
+      transform:scale(0.9) translateY(20px); opacity:0;
+      pointer-events:none; transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
+      overflow:hidden;
+    }
+    .chatbot-window.open { transform:scale(1) translateY(0); opacity:1; pointer-events:all; }
+    .chat-header { padding:16px 18px; display:flex; align-items:center; gap:12px; border-bottom:1px solid #334155; background:rgba(59,130,246,0.05); flex-shrink:0; }
+    .chat-avatar { width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:white; display:flex; align-items:center; justify-content:center; font-size:0.9rem; flex-shrink:0; }
+    .chat-messages { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth; }
+    .chat-msg { display:flex; gap:10px; max-width:88%; }
+    .chat-msg.bot { align-self:flex-start; }
+    .chat-msg.user { align-self:flex-end; flex-direction:row-reverse; }
+    .chat-msg-avatar { width:30px; height:30px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.7rem; }
+    .chat-msg.bot .chat-msg-avatar { background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:white; }
+    .chat-msg.user .chat-msg-avatar { background:rgba(255,255,255,0.1); color:#94a3b8; }
+    .chat-bubble { padding:12px 16px; border-radius:14px; font-size:0.84rem; line-height:1.7; word-break:break-word; }
+    .chat-msg.bot .chat-bubble { background:rgba(255,255,255,0.05); border:1px solid #334155; border-top-left-radius:4px; }
+    .chat-msg.user .chat-bubble { background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); border-top-right-radius:4px; }
+    .chat-input-area { padding:12px 14px; border-top:1px solid #334155; display:flex; gap:8px; align-items:center; flex-shrink:0; }
+    .chat-input-area input { flex:1; background:rgba(0,0,0,0.2); border:1px solid #334155; border-radius:12px; padding:10px 16px; color:white; font-family:inherit; font-size:0.84rem; outline:none; transition:border-color 0.3s; }
+    .chat-input-area input:focus { border-color:rgba(59,130,246,0.5); }
+    .chat-send-btn { width:40px; height:40px; border-radius:12px; border:none; background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:white; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.8rem; transition:all 0.25s; flex-shrink:0; }
+    .chat-send-btn:hover:not(:disabled) { box-shadow:0 0 20px rgba(59,130,246,0.3); transform:scale(1.05); }
+
+    @media (max-width:768px) {
+      .chatbot-window { bottom:0; right:0; width:100vw; max-width:100vw; height:100vh; max-height:100vh; border-radius:0; }
+      .chatbot-fab { bottom:20px; right:20px; }
+    }
+  </style>
+</head>
+<body class="bg-brand-dark text-slate-100 antialiased relative overflow-x-hidden font-sans">
+
+  <div class="grid-bg"></div>
+  <canvas id="particles"></canvas>
+  <div class="scanline"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="mouse-glow" id="mouseGlow"></div>
+
+  <div class="toast" id="toast"><i class="fas fa-circle-info" style="color:#3b82f6;"></i><span id="toastMsg"></span></div>
+
+  <!-- NAVBAR (AUREVION STYLE) -->
+  <nav class="fixed w-full z-50 top-0 border-b border-white/10 bg-brand-dark/90 backdrop-blur-md" id="navbar">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between p-4">
+      <a href="index.html" class="flex items-center space-x-3 group">
+        <img src="https://i.pinimg.com/1200x/fd/c3/bc/fdc3bc815b6e16a0942ad7d17edbfcf3.jpg" alt="Aurevion Logo" class="h-10 w-auto object-contain rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-110 bg-white/5 p-1">
+        <span class="self-center text-2xl font-display font-bold whitespace-nowrap text-white">Aurevion<span class="text-brand-blue">Cloud</span></span>
+      </a>
+      
+      <div class="flex md:order-2 space-x-3 md:space-x-0">
+        <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-slate-300 rounded-lg md:hidden hover:bg-white/10 focus:outline-none" aria-controls="navbar-sticky" aria-expanded="false" id="menu-toggle">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+      
+      <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-white/10 rounded-lg bg-brand-card/50 md:bg-transparent md:flex-row md:space-x-8 md:mt-0 md:border-0 backdrop-blur-xl md:backdrop-blur-none">
+          <li><a href="index.html" class="block py-2 px-3 text-slate-300 rounded hover:bg-white/10 md:hover:bg-transparent md:hover:text-white md:p-0 transition-colors">Beranda</a></li>
+          <li><a href="store-mc.html" class="block py-2 px-3 text-slate-300 rounded hover:bg-white/10 md:hover:bg-transparent md:hover:text-white md:p-0 transition-colors">Store MC</a></li>
+          <li><a href="store-vps.html" class="block py-2 px-3 text-slate-300 rounded hover:bg-white/10 md:hover:bg-transparent md:hover:text-white md:p-0 transition-colors">Store VPS</a></li>
+          <li><a href="store-domain.html" class="block py-2 px-3 text-brand-blue bg-brand-blue/20 rounded md:bg-transparent md:text-brand-blue md:p-0 transition-colors" aria-current="page">Store Domain</a></li>
+          <li class="md:hidden mt-2">
+            <a href="store-domain.html" class="block w-full text-center py-2 px-3 text-white bg-brand-blue rounded-lg">Domain</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main style="position:relative; z-index:2; padding-top: 80px;">
+    <section class="py-20 px-4 text-center">
+      <div class="reveal inline-flex flex-col items-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-blue/20 bg-brand-blue/5 text-brand-blue text-xs font-bold mb-6 uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span> 10 Ekstensi Domain
+        </div>
+        <h1 class="text-4xl md:text-6xl font-display font-bold mb-4">Domain <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent">Profesional</span> & Cepat</h1>
+        <p class="text-slate-400 max-w-2xl mx-auto text-lg">Dapatkan domain premium dengan harga terjangkau. Aktif 1 tahun penuh, siap connected ke Cloudflare dan hosting Anda.</p>
+      </div>
+    </section>
+
+    <!-- SEARCH SECTION -->
+    <section class="px-4 pb-8">
+      <div class="reveal max-w-2xl mx-auto relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-brand-blue to-brand-purple rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+        <div class="relative flex bg-brand-card border border-white/10 rounded-xl p-1.5">
+          <input type="text" id="domainSearch" placeholder="Cari domain... contoh: namakamu" autocomplete="off" class="flex-1 bg-transparent border-none outline-none px-4 py-3 text-white placeholder-slate-500 font-mono text-sm">
+          <button id="searchBtn" class="bg-gradient-to-r from-brand-blue to-brand-purple hover:from-brand-blue/90 hover:to-brand-purple/90 text-white px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2 text-sm">
+            <i class="fas fa-search"></i> Cari
+          </button>
+        </div>
+      </div>
+      <p class="text-center mt-3 text-xs text-slate-500">Ketik nama yang diinginkan, lalu pilih ekstensi domain di bawah</p>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="px-4 pb-4">
+      <div class="reveal flex flex-wrap justify-center gap-3" id="filterPills">
+        <button class="filter-pill active px-5 py-2 rounded-full border border-white/10 bg-brand-card/50 text-slate-400 text-sm hover:border-brand-blue/50 hover:text-white transition-all" data-filter="all">Semua</button>
+        <button class="filter-pill px-5 py-2 rounded-full border border-white/10 bg-brand-card/50 text-slate-400 text-sm hover:border-brand-blue/50 hover:text-white transition-all" data-filter="id">.id</button>
+        <button class="filter-pill px-5 py-2 rounded-full border border-white/10 bg-brand-card/50 text-slate-400 text-sm hover:border-brand-blue/50 hover:text-white transition-all" data-filter="international">Internasional</button>
+        <button class="filter-pill px-5 py-2 rounded-full border border-white/10 bg-brand-card/50 text-slate-400 text-sm hover:border-brand-blue/50 hover:text-white transition-all" data-filter="trend">Trending</button>
+        <button class="filter-pill px-5 py-2 rounded-full border border-white/10 bg-brand-card/50 text-slate-400 text-sm hover:border-brand-blue/50 hover:text-white transition-all" data-filter="budget">Budget</button>
+      </div>
+    </section>
+
+    <!-- DOMAIN GRID -->
+    <section class="max-w-5xl mx-auto px-4 pb-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal" id="domainGrid">
+        
+        <!-- .com Featured -->
+        <button onclick="openCheckout('.com', 165000)" class="group relative p-6 bg-brand-card/40 border border-brand-blue/30 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-brand-blue transition-all hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] md:col-span-2" data-category="international" data-ext=".com">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-blue to-brand-purple"></div>
+          <div class="absolute top-3 right-3 bg-brand-blue/20 text-brand-blue text-xs font-bold px-3 py-1 rounded-full border border-brand-blue/30">PALING LARIS</div>
+          <div class="flex-1">
+            <div class="text-3xl font-mono font-bold text-brand-blue mb-2">.com</div>
+            <div class="flex flex-wrap gap-2 text-xs text-slate-400">
+              <span class="flex items-center gap-1"><i class="fas fa-check text-brand-blue"></i> DNS Mgmt</span>
+              <span class="flex items-center gap-1"><i class="fas fa-check text-brand-blue"></i> Cloudflare</span>
+              <span class="flex items-center gap-1"><i class="fas fa-check text-brand-blue"></i> SSL Free</span>
+              <span class="flex items-center gap-1"><i class="fas fa-check text-brand-blue"></i> 1 Tahun</span>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-2xl font-mono font-bold text-white">Rp165.000</div>
+            <div class="text-xs text-slate-500 mb-2">/tahun</div>
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-blue/10 text-brand-blue text-sm font-medium group-hover:bg-brand-blue group-hover:text-white transition-all">
+              Order <i class="fas fa-arrow-right text-xs"></i>
+            </span>
+          </div>
+        </button>
+
+        <!-- Other Domains (Reusable Template) -->
+        <!-- .id -->
+        <button onclick="openCheckout('.id', 275000)" class="group relative p-5 bg-brand-card/30 border border-white/5 rounded-xl flex items-center justify-between gap-4 hover:border-emerald-500/50 hover:shadow-lg transition-all" data-category="id" data-ext=".id">
+          <div class="flex-1">
+            <div class="text-xl font-mono font-bold text-emerald-400 mb-1">.id</div>
+            <div class="flex gap-2 text-xs text-slate-500"><span>DNS</span><span>Cloudflare</span><span>1 Thn</span></div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-mono font-bold text-white">Rp275.000</div>
+            <div class="text-xs text-slate-500 mb-1">/tahun</div>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-medium group-hover:bg-emerald-500 group-hover:text-black transition-all">Order <i class="fas fa-arrow-right text-[10px]"></i></span>
+          </div>
+        </button>
+
+        <!-- .net -->
+        <button onclick="openCheckout('.net', 265000)" class="group relative p-5 bg-brand-card/30 border border-white/5 rounded-xl flex items-center justify-between gap-4 hover:border-cyan-500/50 hover:shadow-lg transition-all" data-category="international" data-ext=".net">
+          <div class="flex-1">
+            <div class="text-xl font-mono font-bold text-cyan-400 mb-1">.net</div>
+            <div class="flex gap-2 text-xs text-slate-500"><span>DNS</span><span>Cloudflare</span><span>1 Thn</span></div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-mono font-bold text-white">Rp265.000</div>
+            <div class="text-xs text-slate-500 mb-1">/tahun</div>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 text-xs font-medium group-hover:bg-cyan-500 group-hover:text-black transition-all">Order <i class="fas fa-arrow-right text-[10px]"></i></span>
+          </div>
+        </button>
+
+        <!-- web.id -->
+        <button onclick="openCheckout('web.id', 70000)" class="group relative p-5 bg-brand-card/30 border border-white/5 rounded-xl flex items-center justify-between gap-4 hover:border-emerald-500/50 hover:shadow-lg transition-all" data-category="id" data-ext="web.id">
+          <div class="flex-1">
+            <div class="text-xl font-mono font-bold text-emerald-400 mb-1">web.id</div>
+            <div class="flex gap-2 text-xs text-slate-500"><span>DNS</span><span>Cloudflare</span><span>1 Thn</span></div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-mono font-bold text-white">Rp70.000</div>
+            <div class="text-xs text-slate-500 mb-1">/tahun</div>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-medium group-hover:bg-emerald-500 group-hover:text-black transition-all">Order <i class="fas fa-arrow-right text-[10px]"></i></span>
+          </div>
+        </button>
+
+        <!-- .mom -->
+        <button onclick="openCheckout('.mom', 55000)" class="group relative p-5 bg-brand-card/30 border border-white/5 rounded-xl flex items-center justify-between gap-4 hover:border-pink-500/50 hover:shadow-lg transition-all" data-category="trend" data-ext=".mom">
+          <div class="absolute top-3 right-3 bg-pink-500/10 text-pink-400 text-[10px] font-bold px-2 py-0.5 rounded border border-pink-500/20">TRENDING</div>
+          <div class="flex-1">
+            <div class="text-xl font-mono font-bold text-pink-400 mb-1">.mom</div>
+            <div class="flex gap-2 text-xs text-slate-500"><span>DNS</span><span>Cloudflare</span><span>1 Thn</span></div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-mono font-bold text-white">Rp55.000</div>
+            <div class="text-xs text-slate-500 mb-1">/tahun</div>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-pink-500/10 text-pink-400 text-xs font-medium group-hover:bg-pink-500 group-hover:text-white transition-all">Order <i class="fas fa-arrow-right text-[10px]"></i></span>
+          </div>
+        </button>
+
+        <!-- .lol -->
+        <button onclick="openCheckout('.lol', 55000)" class="group relative p-5 bg-brand-card/30 border border-white/5 rounded-xl flex items-center justify-between gap-4 hover:border-purple-500/50 hover:shadow-lg transition-all" data-category="trend" data-ext=".lol">
+          <div class="absolute top-3 right-3 bg-purple-500/10 text-purple-400 text-[10px] font-bold px-2 py-0.5 rounded border border-purple-500/20">TRENDING</div>
+          <div class="flex-1">
+            <div class="text-xl font-mono font-bold text-purple-400 mb-1">.lol</div>
+            <div class="flex gap-2 text-xs text-slate-500"><span>DNS</span><span>Cloudflare</span><span>1 Thn</span></div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-mono font-bold text-white">Rp55.000</div>
+            <div class="text-xs text-slate-500 mb-1">/tahun</div>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-purple-500/10 text-purple-400 text-xs font-medium group-hover:bg-purple-500 group-hover:text-white transition-all">Order <i class="fas fa-arrow-right text-[10px]"></i></span>
+          </div>
+        </button>
+
+        <!-- .xyz -->
+        <button onclick="openCheckout('.xyz', 45000)" class="group relative p-5 bg-brand-card/30 border border-white/5 rounded-xl flex items-center justify-between gap-4 hover:border-cyan-500/50 hover:shadow-lg transition-all" data-category="international" data-ext=".xyz">
+          <div class="flex-1">
+            <div class="text-xl font-mono font-bold text-cyan-400 mb-1">.xyz</div>
+            <div class="flex gap-2 text-xs text-slate-500"><span>DNS</span><span>Cloudflare</span><span>1 Thn</span></div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-mono font-bold text-white">Rp45.000</div>
+            <div class="text-xs text-slate-500 mb-1">/tahun</div>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 text-xs font-medium group-hover:bg-cyan-500 group-hover:text-black transition-all">Order <i class="fas fa-arrow-right text-[10px]"></i></span>
+          </div>
+        </button>
+
+        <!-- .cloud -->
+        <button onclick="openCheckout('.cloud', 40000)" class="group relative p-5 bg-brand-card/30 border border-white/5 rounded-xl flex items-center justify-between gap-4 hover:border-brand-accent/50 hover:shadow-lg transition-all" data-category="trend" data-ext=".cloud">
+          <div class="flex-1">
+            <div class="text-xl font-mono font-bold text-brand-accent mb-1">.cloud</div>
+            <div class="flex gap-2 text-xs text-slate-500"><span>DNS</span><span>Cloudflare</span><span>1 Thn</span></div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-mono font-bold text-white">Rp40.000</div>
+            <div class="text-xs text-slate-500 mb-1">/tahun</div>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-brand-accent/10 text-brand-accent text-xs font-medium group-hover:bg-brand-accent group-hover:text-black transition-all">Order <i class="fas fa-arrow-right text-[10px]"></i></span>
+          </div>
+        </button>
+
+        <!-- my.id -->
+        <button onclick="openCheckout('my.id', 15000)" class="group relative p-5 bg-brand-card/30 border border-white/5 rounded-xl flex items-center justify-between gap-4 hover:border-emerald-500/50 hover:shadow-lg transition-all" data-category="budget" data-ext="my.id">
+          <div class="absolute top-3 right-3 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-500/20">TERMURAH</div>
+          <div class="flex-1">
+            <div class="text-xl font-mono font-bold text-emerald-400 mb-1">my.id</div>
+            <div class="flex gap-2 text-xs text-slate-500"><span>DNS</span><span>Cloudflare</span><span>1 Thn</span></div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-mono font-bold text-white">Rp15.000</div>
+            <div class="text-xs text-slate-500 mb-1">/tahun</div>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-medium group-hover:bg-emerald-500 group-hover:text-black transition-all">Order <i class="fas fa-arrow-right text-[10px]"></i></span>
+          </div>
+        </button>
+
+        <!-- biz.id -->
+        <button onclick="openCheckout('biz.id', 15000)" class="group relative p-5 bg-brand-card/30 border border-white/5 rounded-xl flex items-center justify-between gap-4 hover:border-emerald-500/50 hover:shadow-lg transition-all" data-category="budget" data-ext="biz.id">
+          <div class="flex-1">
+            <div class="text-xl font-mono font-bold text-emerald-400 mb-1">biz.id</div>
+            <div class="flex gap-2 text-xs text-slate-500"><span>DNS</span><span>Cloudflare</span><span>1 Thn</span></div>
+          </div>
+          <div class="text-right">
+            <div class="text-xl font-mono font-bold text-white">Rp15.000</div>
+            <div class="text-xs text-slate-500 mb-1">/tahun</div>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-medium group-hover:bg-emerald-500 group-hover:text-black transition-all">Order <i class="fas fa-arrow-right text-[10px]"></i></span>
+          </div>
+        </button>
+
+      </div>
+      <div id="noResults" style="display:none; text-align:center; padding:60px 20px;">
+        <i class="fas fa-search text-4xl text-slate-700 mb-4"></i>
+        <p class="text-slate-500">Domain tidak ditemukan untuk filter ini.</p>
+      </div>
+    </section>
+
+    <!-- TABLE SECTION -->
+    <section class="max-w-4xl mx-auto px-4 pb-20">
+      <div class="reveal bg-brand-card/40 border border-white/10 rounded-2xl overflow-hidden">
+        <div class="p-6 border-b border-white/10 bg-white/5">
+          <h3 class="text-xl font-display font-bold text-white">Perbandingan Harga</h3>
+          <p class="text-sm text-slate-400">Daftar lengkap semua ekstensi domain</p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-black/20 text-slate-400 font-medium">
+              <tr>
+                <th class="p-4">Ekstensi</th>
+                <th class="p-4">Tipe</th>
+                <th class="p-4 text-right">Harga / Tahun</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+              <tr class="hover:bg-white/5"><td class="p-4 font-mono font-bold text-emerald-400">.my.id</td><td class="p-4 text-slate-400">Indonesia</td><td class="p-4 text-right font-mono text-white">Rp15.000</td></tr>
+              <tr class="hover:bg-white/5"><td class="p-4 font-mono font-bold text-emerald-400">.biz.id</td><td class="p-4 text-slate-400">Indonesia</td><td class="p-4 text-right font-mono text-white">Rp15.000</td></tr>
+              <tr class="hover:bg-white/5"><td class="p-4 font-mono font-bold text-brand-accent">.cloud</td><td class="p-4 text-slate-400">Internasional</td><td class="p-4 text-right font-mono text-white">Rp40.000</td></tr>
+              <tr class="hover:bg-white/5"><td class="p-4 font-mono font-bold text-cyan-400">.xyz</td><td class="p-4 text-slate-400">Internasional</td><td class="p-4 text-right font-mono text-white">Rp45.000</td></tr>
+              <tr class="hover:bg-white/5"><td class="p-4 font-mono font-bold text-pink-400">.mom</td><td class="p-4 text-slate-400">Trending</td><td class="p-4 text-right font-mono text-white">Rp55.000</td></tr>
+              <tr class="hover:bg-white/5"><td class="p-4 font-mono font-bold text-purple-400">.lol</td><td class="p-4 text-slate-400">Trending</td><td class="p-4 text-right font-mono text-white">Rp55.000</td></tr>
+              <tr class="hover:bg-white/5"><td class="p-4 font-mono font-bold text-emerald-400">web.id</td><td class="p-4 text-slate-400">Indonesia</td><td class="p-4 text-right font-mono text-white">Rp70.000</td></tr>
+              <tr class="hover:bg-brand-blue/10"><td class="p-4 font-mono font-bold text-brand-blue">.com</td><td class="p-4 text-slate-400">Internasional</td><td class="p-4 text-right font-mono text-brand-blue">Rp165.000</td></tr>
+              <tr class="hover:bg-white/5"><td class="p-4 font-mono font-bold text-cyan-400">.net</td><td class="p-4 text-slate-400">Internasional</td><td class="p-4 text-right font-mono text-white">Rp265.000</td></tr>
+              <tr class="hover:bg-white/5"><td class="p-4 font-mono font-bold text-emerald-400">.id</td><td class="p-4 text-slate-400">Indonesia</td><td class="p-4 text-right font-mono text-white">Rp275.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="max-w-6xl mx-auto px-4 pb-20">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
+        <div class="p-6 bg-brand-card/30 border border-white/10 rounded-xl flex gap-4 hover:border-brand-blue/50 transition-colors">
+          <div class="w-12 h-12 bg-brand-blue/10 rounded-lg flex items-center justify-center text-brand-blue text-xl flex-shrink-0"><i class="fas fa-calendar-check"></i></div>
+          <div><h4 class="font-bold text-white mb-1">Aktif 1 Tahun</h4><p class="text-sm text-slate-400">Domain aktif penuh 12 bulan tanpa biaya tersembunyi.</p></div>
+        </div>
+        <div class="p-6 bg-brand-card/30 border border-white/10 rounded-xl flex gap-4 hover:border-brand-purple/50 transition-colors">
+          <div class="w-12 h-12 bg-brand-purple/10 rounded-lg flex items-center justify-center text-brand-purple text-xl flex-shrink-0"><i class="fas fa-shield-halved"></i></div>
+          <div><h4 class="font-bold text-white mb-1">Cloudflare Ready</h4><p class="text-sm text-slate-400">Koneksi langsung ke Cloudflare untuk CDN dan keamanan SSL.</p></div>
+        </div>
+        <div class="p-6 bg-brand-card/30 border border-white/10 rounded-xl flex gap-4 hover:border-brand-accent/50 transition-colors">
+          <div class="w-12 h-12 bg-brand-accent/10 rounded-lg flex items-center justify-center text-brand-accent text-xl flex-shrink-0"><i class="fas fa-headset"></i></div>
+          <div><h4 class="font-bold text-white mb-1">Support 24/7</h4><p class="text-sm text-slate-400">Bantuan setup DNS dan kapanpun kamu butuhkan.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CHATBOT BUTTON & WINDOW -->
+  <button class="chatbot-fab" id="chatFab" onclick="toggleChat()">
+    <span class="fab-pulse"></span>
+    <span class="fab-badge" id="chatBadge">1</span>
+    <i class="fas fa-comment-dots" id="fabIconOpen"></i>
+    <i class="fas fa-xmark" id="fabIconClose" style="display:none;"></i>
+  </button>
+
+  <div class="chatbot-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-avatar"><i class="fas fa-robot"></i></div>
+      <div class="flex-1">
+        <div class="font-bold text-white text-sm">Aurevion Bot <span class="bg-brand-blue/20 text-brand-blue text-[10px] px-2 py-0.5 rounded ml-2 font-mono">AI Assistant</span></div>
+        <div class="text-xs text-emerald-400 flex items-center gap-1 mt-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online</div>
+      </div>
+      <button onclick="clearChat()" class="text-slate-400 hover:text-white p-2"><i class="fas fa-trash"></i></button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies flex gap-2 p-4 overflow-x-auto" id="chatQuickReplies"></div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Tanya soal domain..." autocomplete="off" onkeydown="if(event.key==='Enter')sendMessage()">
+      <button class="chat-send-btn" id="chatSendBtn" onclick="sendMessage()" disabled><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script>
+    /* --- PARTILCES & GLOW --- */
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let pArr = [];
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    for (let i = 0; i < 55; i++) {
+      pArr.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 1.3 + 0.4, speedX: (Math.random() - 0.5) * 0.25, speedY: (Math.random() - 0.5) * 0.25, opacity: Math.random() * 0.35 + 0.1 });
+    }
+    function animP() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pArr.forEach(p => {
+        p.x += p.speedX; p.y += p.speedY;
+        if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(0.1, p.size), 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(59,130,246,' + p.opacity + ')'; ctx.fill();
+      });
+      for (let i = 0; i < pArr.length; i++) {
+        for (let j = i + 1; j < pArr.length; j++) {
+          const dx = pArr[i].x - pArr[j].x, dy = pArr[i].y - pArr[j].y, d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 115) {
+            ctx.beginPath(); ctx.moveTo(pArr[i].x, pArr[i].y); ctx.lineTo(pArr[j].x, pArr[j].y);
+            ctx.strokeStyle = 'rgba(59,130,246,' + (0.03 * (1 - d / 115)) + ')'; ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animP);
+    }
+    animP();
+    var mg = document.getElementById('mouseGlow');
+    document.addEventListener('mousemove', e => { mg.style.left = e.clientX + 'px'; mg.style.top = e.clientY + 'px'; });
+
+    /* --- NAVBAR --- */
+    var menuToggle = document.getElementById('menu-toggle');
+    var navbarSticky = document.getElementById('navbar-sticky');
+    var icon = menuToggle.querySelector('i');
+    menuToggle.addEventListener('click', () => {
+      navbarSticky.classList.toggle('hidden');
+      icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-xmark');
+    });
+    navbarSticky.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navbarSticky.classList.add('hidden');
+        icon.classList.remove('fa-xmark'); icon.classList.add('fa-bars');
+      });
+    });
+
+    /* --- DOMAIN SEARCH & FILTER --- */
+    var searchInput = document.getElementById('domainSearch');
+    var domainCards = document.querySelectorAll('#domainGrid button');
+    var noResults = document.getElementById('noResults');
+
+    searchInput.addEventListener('input', function() {
+      var q = this.value.trim().toLowerCase();
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      document.querySelector('.filter-pill[data-filter="all"]').classList.add('active');
+      var count = 0;
+      domainCards.forEach(card => {
+        var ext = card.dataset.ext || '';
+        if (!q || ext.includes(q)) { card.style.display = 'flex'; count++; } else { card.style.display = 'none'; }
+      });
+      noResults.style.display = count === 0 ? 'block' : 'none';
+    });
+
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      var q = searchInput.value.trim().toLowerCase();
+      if(!q) return showToast('Ketik nama domain terlebih dahulu');
+      var found = false;
+      domainCards.forEach(card => {
+        if(card.dataset.ext.includes(q)) { card.style.display = 'flex'; found = true; } else { card.style.display = 'none'; }
+      });
+      showToast(found ? 'Domain ditemukan!' : 'Domain tidak tersedia');
+      noResults.style.display = found ? 'none' : 'block';
+    });
+
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        var f = this.dataset.filter;
+        searchInput.value = '';
+        var count = 0;
+        domainCards.forEach(card => {
+          if (f === 'all') { card.style.display = 'flex'; count++; }
+          else {
+            var cats = (card.dataset.category || '').split(' ');
+            if (cats.indexOf(f) !== -1) { card.style.display = 'flex'; count++; } else { card.style.display = 'none'; }
+          }
+        });
+        noResults.style.display = count === 0 ? 'block' : 'none';
+      });
+    });
+
+    /* --- CHECKOUT --- */
+    function openCheckout(ext, price) {
+      var name = searchInput.value.trim();
+      var domainName = name ? name + ext : ext;
+      var priceStr = 'Rp' + price.toLocaleString('id-ID');
+      // UPDATED WA NUMBER
+      var waText = 'Halo, saya ingin order domain *' + domainName + '* (' + priceStr + '/tahun)';
+      var waUrl = 'https://wa.me/62895391495653?text=' + encodeURIComponent(waText);
+      window.open(waUrl, '_blank');
+      showToast('Mengarahkan ke WhatsApp...');
+    }
+
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    /* --- SCROLL REVEAL --- */
+    var observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* --- CHATBOT LOGIC (UPDATED WA & PERSONA) --- */
+    var GROQ_API_KEY = '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';
+    var GROQ_MODEL = 'llama-3.3-70b-versatile';
+    var API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+    // UPDATED SYSTEM PROMPT
+    var SYSTEM_PROMPT = 'Kamu adalah "Aurevion Bot", asisten AI resmi Aurevion Cloud. Kamu ramah, singkat, dan to-the-point. Bahasa Indonesia santai tapi profesional.\n\nINFO DOMAIN:\n- my.id / biz.id → Rp15.000/tahun (Termurah)\n- .cloud → Rp40.000/tahun\n- .xyz → Rp45.000/tahun\n- .mom / .lol → Rp55.000/tahun (Trending)\n- web.id → Rp70.000/tahun\n- .com → Rp165.000/tahun (Paling Laris)\n- .net → Rp265.000/tahun\n- .id → Rp275.000/tahun\n\nFITUR: DNS Mgmt, Cloudflare Ready, SSL Gratis, Support 24/7.\n\nKETENTUAN: Aktif 1 Tahun, tidak bisa diperpanjang via kami, bisa migrasi.\n\nMETODE BAYAR: QRIS, E-Wallet, Bank.\n\nKONTAK WA: 62895391495653.\n\nLAYANAN LAIN: Minecraft Hosting, VPS Server.\n\nATURAN: Kalau ditanya di luar topik, arahkan kembali. Gunakan HTML untuk format. Link WA: <a href="https://wa.me/62895391495653?text=xxx" target="_blank">';
+
+    var conversationHistory = [];
+    var chatOpen = false, isTyping = false, firstOpen = true;
+    var chatFab = document.getElementById('chatFab'), chatWindow = document.getElementById('chatWindow');
+    var chatMessages = document.getElementById('chatMessages'), chatInput = document.getElementById('chatInput');
+    var chatSendBtn = document.getElementById('chatSendBtn'), chatBadge = document.getElementById('chatBadge');
+    
+    chatInput.addEventListener('input', () => chatSendBtn.disabled = !chatInput.value.trim() || isTyping);
+    function toggleChat() {
+      chatOpen = !chatOpen; chatWindow.classList.toggle('open', chatOpen); chatFab.classList.toggle('open', chatOpen);
+      document.getElementById('fabIconOpen').style.display = chatOpen ? 'none' : 'inline';
+      document.getElementById('fabIconClose').style.display = chatOpen ? 'inline' : 'none';
+      if (chatOpen) {
+        chatBadge.style.display = 'none';
+        if (firstOpen) { firstOpen = false; initChat(); }
+        setTimeout(() => chatInput.focus(), 350);
+      }
+    }
+    function initChat() {
+      conversationHistory = []; chatMessages.innerHTML = '';
+      addBotMessage('Halo! Saya <strong>Aurevion Bot</strong>. Saya bisa bantu kamu cari domain, info harga, atau cara setup DNS. Apa yang ingin kamu tanyakan?');
+      showQuickReplies([{text:'Harga Domain',query:'Harga semua domain berapa?'},{text:'Termurah',query:'Domain termurah apa?'},{text:'Cara Order',query:'Gimana cara order domain?'}]);
+    }
+    function addBotMessage(html) {
+      chatMessages.insertAdjacentHTML('beforeend', '<div class="chat-msg bot"><div class="chat-msg-avatar"><i class="fas fa-robot"></i></div><div><div class="chat-bubble">' + html + '</div></div></div>');
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    function addUserMessage(text) {
+      chatMessages.insertAdjacentHTML('beforeend', '<div class="chat-msg user"><div class="chat-msg-avatar"><i class="fas fa-user"></i></div><div><div class="chat-bubble">' + text + '</div></div></div>');
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    function showTypingIndicator() {
+      isTyping = true; chatSendBtn.disabled = true;
+      chatMessages.insertAdjacentHTML('beforeend', '<div class="chat-msg bot" id="typingMsg"><div class="chat-msg-avatar"><i class="fas fa-robot"></i></div><div class="typing-dots"><span></span><span></span><span></span></div></div>');
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    function hideTypingIndicator() {
+      isTyping = false; chatSendBtn.disabled = !chatInput.value.trim();
+      var el = document.getElementById('typingMsg'); if(el) el.remove();
+    }
+    function showQuickReplies(replies) {
+      var container = document.getElementById('chatQuickReplies'); container.innerHTML = '';
+      replies.forEach(r => {
+        var btn = document.createElement('button');
+        btn.className = 'px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs text-white whitespace-nowrap transition-colors';
+        btn.textContent = r.text;
+        btn.onclick = () => { container.innerHTML = ''; processInput(r.query); };
+        container.appendChild(btn);
+      });
+    }
+    function clearChat() { initChat(); }
+    function sendMessage() {
+      var text = chatInput.value.trim(); if (!text || isTyping) return;
+      chatInput.value = ''; chatSendBtn.disabled = true; processInput(text);
+    }
+    async function processInput(text) {
+      addUserMessage(text); showTypingIndicator(); document.getElementById('chatQuickReplies').innerHTML = '';
+      conversationHistory.push({ role: 'user', content: text });
+      try {
+        var res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_API_KEY },
+          body: JSON.stringify({ model: GROQ_MODEL, messages: [{role:'system',content:SYSTEM_PROMPT}].concat(conversationHistory.slice(-20)), temperature: 0.7, max_tokens: 800 })
+        });
+        var data = await res.json();
+        hideTypingIndicator();
+        if (data.choices && data.choices[0]) {
+          var raw = data.choices[0].message.content;
+          var html = raw.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>').replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank">$1</a>');
+          addBotMessage(html); conversationHistory.push({ role: 'assistant', content: raw });
+        } else { throw new Error('No response'); }
+      } catch (err) {
+        hideTypingIndicator();
+        addBotMessage('Maaf, saya sedang offline. Silakan <a href="https://wa.me/62895391495653" target="_blank"hubungi admin via WhatsApp</a> untuk bantuan cepat.');
+      }
+    }
+  </script>
+</body>
+</html>
