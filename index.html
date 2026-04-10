@@ -1,13 +1,382 @@
-    <!-- 
-        GANTI SELURUH SCRIPT INI DI BAGIAN PALING BAWAH index.html 
-        (Tepat di atas tag </body>, sebelum script FAQ)
-    -->
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurevion Cloud - Hosting Premium</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config (Sama persis dengan login.html) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',    // Slate 900
+                            card: '#1e293b',    // Slate 800
+                            blue: '#3b82f6',    // Blue 500
+                            purple: '#8b5cf6',  // Violet 500
+                            accent: '#06b6d4',  // Cyan 500
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-brand-dark text-slate-100 antialiased relative min-h-screen">
+
+    <!-- BACKGROUND EFFECTS (Sama dengan Login) -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-blue/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-purple/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-brand-accent/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+        <!-- Pattern Grid Background -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] [center_top] opacity-5"></div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 start-0 border-b border-white/10 bg-brand-dark/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between mx-auto p-4">
+            
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3 rtl:space-x-reverse group">
+                <div class="w-10 h-10 bg-gradient-to-br from-brand-blue to-brand-purple rounded-lg flex items-center justify-center shadow-lg shadow-brand-purple/20 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-cloud-bolt text-white text-xl"></i>
+                </div>
+                <span class="self-center text-2xl font-display font-bold whitespace-nowrap text-white">Aurevion<span class="text-brand-blue">Cloud</span></span>
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-slate-400 rounded-lg md:hidden hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-brand-blue" aria-controls="navbar-default" aria-expanded="false" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <span class="sr-only">Buka menu utama</span>
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+
+            <!-- Links & Auth -->
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-white/10 rounded-lg bg-brand-card/50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent">
+                    <li>
+                        <a href="#home" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-brand-blue md:p-0" aria-current="page">Beranda</a>
+                    </li>
+                    <li>
+                        <a href="#store" class="block py-2 px-3 text-slate-300 rounded hover:bg-white/10 md:hover:bg-transparent md:hover:text-brand-blue md:p-0 transition-colors">Layanan</a>
+                    </li>
+                    <li>
+                        <a href="#pricing" class="block py-2 px-3 text-slate-300 rounded hover:bg-white/10 md:hover:bg-transparent md:hover:text-brand-blue md:p-0 transition-colors">Harga</a>
+                    </li>
+                    
+                    <!-- Dynamic Auth Section (Diisi oleh Javascript) -->
+                    <li id="auth-container" class="flex items-center gap-3 mt-2 md:mt-0 pl-0 md:pl-4 border-l border-white/10 md:border-l-0">
+                        <!-- Default State (Loading) -->
+                        <i class="fa-solid fa-circle-notch fa-spin text-brand-blue"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-card/95 backdrop-blur-xl border-b border-white/10">
+            <ul class="font-medium flex flex-col p-4 space-y-3">
+                <li><a href="#home" class="text-brand-blue block">Beranda</a></li>
+                <li><a href="#store" class="text-slate-300 hover:text-white block">Layanan</a></li>
+                <li><a href="#pricing" class="text-slate-300 hover:text-white block">Harga</a></li>
+                <li id="mobile-auth-container" class="pt-4 border-t border-white/10 flex flex-col gap-2">
+                    <!-- Mobile Auth Buttons -->
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden z-10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="inline-block px-4 py-1.5 mb-6 rounded-full border border-brand-blue/30 bg-brand-blue/10 text-brand-blue text-sm font-semibold tracking-wide animate-pulse">
+                🚀 Platform Hosting #1 untuk Developer
+            </div>
+            
+            <h1 class="mb-6 text-5xl font-extrabold tracking-tight leading-tight text-white md:text-6xl lg:text-7xl font-display">
+                Solusi Cloud <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-purple to-brand-accent">Tanpa Batas</span>
+            </h1>
+            
+            <p class="mb-10 text-lg font-normal text-slate-400 lg:text-xl sm:px-16 xl:px-48 max-w-4xl mx-auto">
+                Deploy server VPS dan Panel Minecraft Anda dalam hitungan detik. Performa tinggi, anti-DDoS, dan dukungan teknis 24/7 dengan harga pelajar.
+            </p>
+            
+            <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+                <a href="#store" class="inline-flex justify-center items-center py-3.5 px-8 text-base font-medium text-center text-white rounded-lg bg-gradient-to-r from-brand-blue to-brand-purple hover:from-brand-blue/90 hover:to-brand-purple/90 focus:ring-4 focus:ring-brand-purple/30 shadow-lg shadow-brand-purple/25 transition-all hover:-translate-y-1">
+                    Mulai Sekarang
+                    <i class="fa-solid fa-rocket ml-2"></i>
+                </a>
+                <a href="#pricing" class="inline-flex justify-center items-center py-3.5 px-8 text-base font-medium text-center text-white rounded-lg border border-white/20 hover:bg-white/10 focus:ring-4 focus:ring-slate-700 backdrop-blur-sm transition-all">
+                    Lihat Paket Harga
+                </a>
+            </div>
+
+            <!-- Dashboard Preview Mockup (CSS Only) -->
+            <div class="mx-auto max-w-5xl rounded-xl border border-white/10 bg-brand-card/50 backdrop-blur-sm shadow-2xl overflow-hidden relative group">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent z-10 opacity-60"></div>
+                <!-- Mockup Header -->
+                <div class="h-8 bg-white/5 border-b border-white/5 flex items-center px-4 gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <!-- Mockup Content -->
+                <div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-4 opacity-80 group-hover:scale-[1.01] transition-transform duration-700">
+                    <div class="h-32 rounded-lg bg-brand-blue/20 border border-brand-blue/20 animate-pulse"></div>
+                    <div class="h-32 rounded-lg bg-brand-purple/20 border border-brand-purple/20 animate-pulse delay-75"></div>
+                    <div class="h-32 rounded-lg bg-brand-accent/20 border border-brand-accent/20 animate-pulse delay-150"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORE LINKS SECTION (KATEGORI) -->
+    <section id="store" class="py-20 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Pilih <span class="text-brand-purple">Layanan</span> Anda</h2>
+                <p class="text-slate-400">Kami menyediakan panel kontrol khusus untuk kebutuhan spesifik Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                
+                <!-- Link ke Store VPS -->
+                <a href="store-vps.html" class="group relative p-8 rounded-2xl bg-brand-card/60 border border-white/10 hover:border-brand-blue/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-blue/20 rounded-full blur-3xl group-hover:bg-brand-blue/30 transition-all"></div>
+                    
+                    <div class="flex flex-col items-start relative z-10">
+                        <div class="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center text-brand-blue text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 group-hover:text-brand-blue transition-colors">Cloud VPS</h3>
+                        <p class="text-slate-400 mb-6 text-sm">Server virtual performa tinggi untuk aplikasi web, bot, atau kebutuhan komputasi umum.</p>
+                        <span class="inline-flex items-center text-brand-blue font-medium group-hover:translate-x-2 transition-transform">
+                            Pesan VPS <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Link ke Store MC -->
+                <a href="store-mc.html" class="group relative p-8 rounded-2xl bg-brand-card/60 border border-white/10 hover:border-brand-purple/50 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-purple/20 rounded-full blur-3xl group-hover:bg-brand-purple/30 transition-all"></div>
+                    
+                    <div class="flex flex-col items-start relative z-10">
+                        <div class="w-14 h-14 rounded-xl bg-brand-purple/20 flex items-center justify-center text-brand-purple text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-cube"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 group-hover:text-brand-purple transition-colors">Minecraft Panel</h3>
+                        <p class="text-slate-400 mb-6 text-sm">Hosting khusus game dengan Pterodactyl Panel. Anti-DDoS dan support plugin lengkap.</p>
+                        <span class="inline-flex items-center text-brand-purple font-medium group-hover:translate-x-2 transition-transform">
+                            Pesan MC <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="py-20 bg-black/20 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-6 rounded-2xl bg-brand-card/40 border border-white/5 backdrop-blur-sm">
+                    <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center text-green-400 mb-4">
+                        <i class="fa-solid fa-bolt text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Performa NVMe</h3>
+                    <p class="text-slate-400 text-sm">Menggunakan storage SSD NVMe terbaru dengan kecepatan baca/tulis hingga 3500MB/s.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="p-6 rounded-2xl bg-brand-card/40 border border-white/5 backdrop-blur-sm">
+                    <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center text-red-400 mb-4">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Anti-DDoS Pro</h3>
+                    <p class="text-slate-400 text-sm">Proteksi layer 4 & 7 canggih menjaga server Anda tetap online saat diserang.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="p-6 rounded-2xl bg-brand-card/40 border border-white/5 backdrop-blur-sm">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400 mb-4">
+                        <i class="fa-solid fa-headset text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Support 24/7</h3>
+                    <p class="text-slate-400 text-sm">Tim teknis kami siap membantu instalasi dan troubleshooting kapan saja via WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-20 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Pilih Paket <span class="text-brand-blue">Terbaik</span></h2>
+                <p class="text-slate-400">Upgrade kapan saja sesuai kebutuhan pertumbuhan project Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Starter -->
+                <div class="flex flex-col p-6 rounded-2xl bg-brand-card/40 border border-white/5 hover:border-white/20 transition-all">
+                    <h3 class="text-xl font-bold text-white">Starter</h3>
+                    <p class="text-sm text-slate-400 mb-6">Cocok untuk pemula</p>
+                    <div class="mb-6">
+                        <span class="text-3xl font-bold text-white">Rp5rb</span><span class="text-slate-500">/bln</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-slate-300 flex-1">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 1 GB RAM</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 4 GB Storage</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Unlimited Bandwidth</li>
+                    </ul>
+                    <a href="store-vps.html" class="w-full py-2 rounded-lg border border-white/20 text-center hover:bg-white/10 transition-colors block">Pilih</a>
+                </div>
+
+                <!-- Basic (Popular) -->
+                <div class="flex flex-col p-6 rounded-2xl bg-gradient-to-b from-brand-purple/20 to-brand-card/80 border border-brand-purple/50 relative transform md:-translate-y-4 shadow-lg shadow-brand-purple/10">
+                    <div class="absolute top-0 right-0 bg-brand-purple text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">BEST SELLER</div>
+                    <h3 class="text-xl font-bold text-brand-purple">Basic</h3>
+                    <p class="text-sm text-slate-400 mb-6">Paling pas untuk UMKM</p>
+                    <div class="mb-6">
+                        <span class="text-3xl font-bold text-white">Rp10rb</span><span class="text-slate-500">/bln</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-slate-300 flex-1">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 2 GB RAM</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 8 GB NVMe Storage</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Unlimited Bandwidth</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Prioritas Support</li>
+                    </ul>
+                    <a href="store-vps.html" class="w-full py-2 rounded-lg bg-brand-purple hover:bg-brand-purple/90 text-white text-center font-medium transition-colors block">Pilih</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="flex flex-col p-6 rounded-2xl bg-brand-card/40 border border-white/5 hover:border-white/20 transition-all">
+                    <h3 class="text-xl font-bold text-white">Pro</h3>
+                    <p class="text-sm text-slate-400 mb-6">Skala menengah</p>
+                    <div class="mb-6">
+                        <span class="text-3xl font-bold text-white">Rp20rb</span><span class="text-slate-500">/bln</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-slate-300 flex-1">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 4 GB RAM</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 15 GB NVMe Storage</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 120% CPU Power</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Backup Mingguan</li>
+                    </ul>
+                    <a href="store-vps.html" class="w-full py-2 rounded-lg border border-white/20 text-center hover:bg-white/10 transition-colors block">Pilih</a>
+                </div>
+
+                <!-- Ultra -->
+                <div class="flex flex-col p-6 rounded-2xl bg-brand-card/40 border border-white/5 hover:border-white/20 transition-all">
+                    <h3 class="text-xl font-bold text-white">Ultra</h3>
+                    <p class="text-sm text-slate-400 mb-6">Performa tanpa batas</p>
+                    <div class="mb-6">
+                        <span class="text-3xl font-bold text-white">Rp40rb</span><span class="text-slate-500">/bln</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-slate-300 flex-1">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 8 GB RAM</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 30 GB NVMe Storage</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 150% CPU Power</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Dedicated IP</li>
+                    </ul>
+                    <a href="store-vps.html" class="w-full py-2 rounded-lg border border-white/20 text-center hover:bg-white/10 transition-colors block">Pilih</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black/40 border-t border-white/10 relative z-10 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2 mb-4">
+                        <i class="fa-solid fa-cloud-bolt text-brand-blue text-2xl"></i>
+                        <span class="text-xl font-bold font-display text-white">AurevionCloud</span>
+                    </a>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Partner hosting terpercaya dengan harga pelajar dan kualitas enterprise. Kami membangun infrastruktur digital untuk masa depan.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Produk</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="store-vps.html" class="hover:text-brand-blue transition-colors">Cloud VPS</a></li>
+                        <li><a href="store-mc.html" class="hover:text-brand-blue transition-colors">Minecraft Hosting</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition-colors">Dedicated Server</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition-colors">Domain</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Perusahaan</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-brand-blue transition-colors">Tentang Kami</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition-colors">Status Server</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition-colors">Ketentuan Layanan</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition-colors">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Metode Pembayaran</h4>
+                    <div class="flex gap-3 text-2xl text-slate-400">
+                        <i class="fa-solid fa-wallet" title="E-Wallet"></i>
+                        <i class="fa-solid fa-building-columns" title="Bank Transfer"></i>
+                        <i class="fa-solid fa-qrcode" title="QRIS"></i>
+                        <i class="fa-brands fa-cc-visa" title="Credit Card"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 text-center text-sm text-slate-500">
+                &copy; 2023 AurevionCloud. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- FIREBASE AUTH & LOGIC SCRIPT -->
     <script type="module">
         // Import Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
-        // Konfigurasi Firebase (SAMA DENGAN FILE LOGIN)
+        // Firebase Config (Sama dengan login.html)
         const firebaseConfig = {
             apiKey: "AIzaSyDTPN4MXqk4L_zOxO1hK3bftHeehTLwB0g",
             authDomain: "login-dae4f.firebaseapp.com",
@@ -22,70 +391,70 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        const authContainer = document.getElementById('authContainer');
-        const navbarSticky = document.getElementById('navbar-sticky');
-        const navbar = document.getElementById('navbar');
+        const authContainer = document.getElementById('auth-container');
+        const mobileAuthContainer = document.getElementById('mobile-auth-container');
 
-        // FUNGSI GLOBAL UNTUK TOGGLE MENU
-        window.toggleMenu = () => {
-            navbarSticky.classList.toggle('hidden');
-        };
-
-        // FUNGSI LOGOUT
-        window.handleLogout = () => {
-            if(confirm('Apakah Anda yakin ingin keluar?')) {
-                signOut(auth).then(() => {
-                    // Redirect ke login setelah keluar
-                    window.location.href = "login.html"; 
-                }).catch((error) => {
-                    console.error('Error logout:', error);
-                    alert('Gagal keluar, coba lagi.');
-                });
+        // Fungsi Logout
+        window.handleLogout = async () => {
+            try {
+                await signOut(auth);
+                window.location.href = "index.html";
+            } catch (error) {
+                console.error("Logout Error:", error);
+                alert("Gagal logout");
             }
         };
 
-        // FUNGSI SCROLL NAVBAR
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                navbar.classList.add('shadow-lg');
-                navbar.classList.replace('bg-brand-dark/80', 'bg-brand-dark/95');
-            } else {
-                navbar.classList.remove('shadow-lg');
-                navbar.classList.replace('bg-brand-dark/95', 'bg-brand-dark/80');
-            }
-        });
-
-        // LOGIKA CEK STATUS LOGIN (W AJIB LOGIN)
+        // Listener State Login (Update Navbar)
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // --- USER SUDAH LOGIN ---
+                // User SUDAH Login
                 const displayName = user.displayName || user.email.split('@')[0];
                 
-                // Render HTML untuk User yang Login
+                // Tampilan Desktop
                 authContainer.innerHTML = `
-                    <div class="hidden md:flex items-center gap-3 mr-4">
-                        <div class="text-right">
-                            <p class="text-xs text-slate-400">Selamat Datang,</p>
-                            <p class="text-sm font-bold text-white">${displayName}</p>
+                    <div class="flex items-center gap-3">
+                        <div class="text-right hidden md:block">
+                            <div class="text-xs text-slate-400">Halo,</div>
+                            <div class="text-sm font-bold text-white truncate max-w-[100px]">${displayName}</div>
                         </div>
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-brand-purple flex items-center justify-center text-white font-bold shadow-lg border border-white/10">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-brand-purple flex items-center justify-center text-white font-bold shadow-lg">
                             ${displayName.charAt(0).toUpperCase()}
                         </div>
+                        <button onclick="handleLogout()" class="text-slate-400 hover:text-red-400 transition-colors" title="Logout">
+                            <i class="fa-solid fa-right-from-bracket text-lg"></i>
+                        </button>
                     </div>
-                    <button onclick="window.handleLogout()" class="hidden sm:flex text-white bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:ring-slate-700 font-medium rounded-lg text-sm px-4 py-2 transition-all items-center gap-2">
-                        <i class="fa-solid fa-right-from-bracket"></i> Keluar
-                    </button>
-                    <!-- Tombol Mobile Menu -->
-                    <button onclick="window.toggleMenu()" class="ml-2 inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-slate-300 rounded-lg md:hidden hover:bg-white/10 focus:outline-none">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
                 `;
-                
+
+                // Tampilan Mobile
+                mobileAuthContainer.innerHTML = `
+                    <div class="bg-white/5 p-3 rounded-lg flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center text-white font-bold text-sm">
+                                ${displayName.charAt(0).toUpperCase()}
+                            </div>
+                            <span class="text-sm font-bold text-white">${displayName}</span>
+                        </div>
+                        <button onclick="handleLogout()" class="text-xs text-red-400 font-medium">Keluar</button>
+                    </div>
+                `;
             } else {
-                // --- USER BELUM LOGIN ---
-                // PERUBAHAN PENTING: Langsung Redirect ke Login
-                console.log("Akses ditolak. Mengarahkan ke login...");
-                window.location.href = "login.html";
+                // User BELUM Login
+                // Tampilan Desktop
+                authContainer.innerHTML = `
+                    <a href="login.html" class="text-slate-300 hover:text-white font-medium transition-colors">Masuk</a>
+                    <a href="login.html" class="text-white bg-brand-blue hover:bg-brand-blue/90 focus:ring-4 focus:ring-brand-blue/30 font-medium rounded-lg text-sm px-4 py-2 text-center transition-all shadow-lg shadow-brand-blue/20">
+                        Daftar Akun
+                    </a>
+                `;
+
+                // Tampilan Mobile
+                mobileAuthContainer.innerHTML = `
+                    <a href="login.html" class="w-full text-center py-2 rounded-lg border border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white transition-colors">Masuk / Daftar</a>
+                `;
             }
         });
     </script>
+</body>
+</html>
