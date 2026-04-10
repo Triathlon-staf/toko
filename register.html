@@ -111,7 +111,7 @@
                         <div class="relative">
                             <i class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"></i>
                             <input type="password" id="regPassword" required class="w-full bg-brand-dark/50 border border-white/10 rounded-lg py-2.5 pl-10 pr-10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all" placeholder="Minimal 6 karakter">
-                            <button type="button" onclick="togglePassword('regPassword', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white">
+                            <button type="button" onclick="togglePassword('regPassword', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white focus:outline-none">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
                         </div>
@@ -149,11 +149,11 @@
         </div>
     </main>
 
-    <!-- FIREBASE AUTH SCRIPT -->
+    <!-- FIREBASE AUTH SCRIPT (UPDATED) -->
     <script type="module">
         // Import Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
         // Konfigurasi Firebase (SAMA DENGAN FILE LAIN)
         const firebaseConfig = {
@@ -170,9 +170,20 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
+        // AUTH STATE LISTENER
+        // Jika user sudah login, arahkan ke index.html (Agar tidak daftar akun ganda)
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log("User sudah login, redirect ke index.html");
+                window.location.href = "index.html";
+            } else {
+                console.log("User belum login, boleh daftar di sini.");
+            }
+        });
+
         // FUNGSI REGISTER
         window.handleRegister = async (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Mencegah reload halaman
             const name = document.getElementById('regName').value;
             const email = document.getElementById('regEmail').value;
             const password = document.getElementById('regPassword').value;
@@ -198,7 +209,7 @@
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 
-                // Update Profile Name (Agar nama muncul di index.html nanti)
+                // Update Profile Name (Agar nama muncul di navbar index.html nanti)
                 await updateProfile(userCredential.user, {
                     displayName: name
                 });
@@ -225,15 +236,15 @@
                 showAlert(userMessage, 'error');
 
                 // Reset Button
-                btn.innerHTML = '<span>Daftar Sekarang</span> <i class="fa-solid fa-user-plus"></i>';
+                btn.innerHTML = '<span>Buat Akun</span> <i class="fa-solid fa-user-plus"></i>';
                 btn.disabled = false;
             }
         };
 
-        // HELPER FUNCTIONS
+        // HELPERPER FUNCTIONS
         function showAlert(message, type) {
             const alertBox = document.getElementById('authAlert');
-            alertBox.innerHTML = message; // Gunakan innerHTML untuk memungkinkan tag HTML (link login)
+            alertBox.innerHTML = message; // Support HTML text for links
             alertBox.classList.remove('hidden', 'bg-red-500/10', 'text-red-400', 'border-red-500/20', 'bg-green-500/10', 'text-green-400', 'border-green-500/20');
             
             if (type === 'error') {
