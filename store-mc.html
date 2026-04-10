@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Minecraft - Aurevion Cloud</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { dark: '#0f172a', card: '#1e293b', blue: '#3b82f6', purple: '#8b5cf6', accent: '#06b6d4' }
+                    },
+                    fontFamily: { sans: ['Outfit', 'sans-serif'], display: ['Space Grotesk', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-dark text-slate-100 antialiased min-h-screen">
+
+    <!-- NAVBAR (Sama seperti Index) -->
+    <nav class="fixed w-full z-50 top-0 border-b border-white/10 bg-brand-dark/90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between p-4">
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <img src="https://i.pinimg.com/1200x/fd/c3/bc/fdc3bc815b6e16a0942ad7d17edbfcf3.jpg" alt="Logo" class="h-8 w-auto object-contain rounded bg-white/5 p-1">
+                <span class="text-xl font-display font-bold text-white">Aurevion<span class="text-brand-blue">Cloud</span></span>
+            </a>
+            <div class="flex md:order-2">
+                <a href="store-vps.html" class="text-sm bg-brand-purple hover:bg-brand-purple/90 text-white px-4 py-2 rounded-lg transition-colors">
+                    <i class="fa-solid fa-server mr-1"></i> Store VPS
+                </a>
+            </div>
+            <div class="hidden w-full md:block md:w-auto md:order-1">
+                <ul class="flex p-4 mt-0 font-medium space-x-8">
+                    <li><a href="index.html" class="text-slate-400 hover:text-white">Beranda</a></li>
+                    <li><a href="store-mc.html" class="text-brand-blue">Store MC</a></li>
+                    <li><a href="store-vps.html" class="text-slate-400 hover:text-white">Store VPS</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="pt-24 pb-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-display font-bold text-white mb-4">Store Minecraft Hosting</h1>
+                <p class="text-slate-400">Pilih paket sesuai kebutuhan server Anda. Harga mulai Rp 5.000/GB.</p>
+            </div>
+
+            <!-- GRID PRODUK -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <!-- Paket 1 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold text-white">Paket 1</h3>
+                            <span class="bg-brand-blue/20 text-brand-blue text-xs px-2 py-1 rounded">Best Seller</span>
+                        </div>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 1 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 100%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 4 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp5.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%201%20(1GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 2 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 2</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 2 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 100%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 8 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp10.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%202%20(2GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 3 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 3</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 3 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 200%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 12 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp15.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%203%20(3GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 4 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold text-white">Paket 4</h3>
+                            <span class="bg-brand-purple/20 text-brand-purple text-xs px-2 py-1 rounded">Populer</span>
+                        </div>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 4 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 200%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 16 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp20.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%204%20(4GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 5 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 5</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 5 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 300%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 20 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp25.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%205%20(5GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 6 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 6</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 6 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 300%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 24 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp30.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%206%20(6GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 7 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 7</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 7 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 400%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 28 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp35.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%207%20(7GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 8 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 8</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 8 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 400%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 32 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp40.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%208%20(8GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 9 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 9</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 9 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 500%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 36 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp45.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%209%20(9GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 10 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 10</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 10 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 500%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 40 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp50.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2010%20(10GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 11 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 11</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 11 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 600%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 44 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp55.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2011%20(11GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 12 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 12</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 12 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 600%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 48 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp60.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2012%20(12GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 13 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 13</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 13 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 700%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 52 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp65.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2013%20(13GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 14 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 14</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 14 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 700%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 56 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp70.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2014%20(14GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 15 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 15</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 15 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 800%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 60 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp75.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2015%20(15GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 16 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 16</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 16 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 800%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 64 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp80.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2016%20(16GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 17 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 17</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 17 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 900%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 68 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp85.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2017%20(17GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 18 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 18</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 18 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 900%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 72 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp90.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2018%20(18GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 19 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 19</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 19 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 1000%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 76 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp95.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2019%20(19GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 20 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold text-white">Paket 20</h3>
+                            <span class="bg-yellow-500/20 text-yellow-500 text-xs px-2 py-1 rounded">Sultan</span>
+                        </div>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 20 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 1000%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 80 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp100.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2020%20(20GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 21 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 21</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 21 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 1100%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 84 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp105.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2021%20(21GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 22 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 22</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 22 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 1100%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 88 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp110.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2022%20(22GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 23 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 23</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 23 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 1200%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 92 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp115.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2023%20(23GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 24 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 24</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 24 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 1200%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 96 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp120.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2024%20(24GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 25 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 25</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 25 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 1300%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 100 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp125.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2025%20(25GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 26 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 26</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 26 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 1300%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 104 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp130.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2026%20(26GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 27 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 27</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 27 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 1400%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 108 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp135.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2027%20(27GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Paket 28 -->
+                <div class="bg-brand-card/40 border border-white/10 rounded-xl p-5 hover:border-brand-blue transition-all flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-3">Paket 28</h3>
+                        <div class="space-y-2 text-sm text-slate-300 mb-4">
+                            <p><i class="fa-solid fa-memory w-5 text-brand-accent"></i> Ram : 28 GB</p>
+                            <p><i class="fa-solid fa-microchip w-5 text-brand-accent"></i> Cpu : 1400%</p>
+                            <p><i class="fa-solid fa-hard-drive w-5 text-brand-accent"></i> Disk : 112 GB</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                        <span class="text-xl font-display font-bold text-white">Rp140.000</span>
+                        <a href="https://wa.me/62895391495653?text=Halo%20Admin%2C%20saya%20mau%20beli%20Paket%2028%20(28GB%20RAM).%20Apakah%20masih%20tersedia%3F" target="_blank" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Beli
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Benefit Section -->
+            <div class="mt-12 bg-brand-card/30 border border-white/10 rounded-xl p-6">
+                <h3 class="text-2xl font-bold text-white mb-4"><i class="fa-solid fa-star text-yellow-500"></i> Benefit:</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 text-slate-300">
+                    <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Server stabil & kencang</li>
+                    <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Cocok untuk bot / web / game</li>
+                    <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Support ready 24/7</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
