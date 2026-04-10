@@ -88,11 +88,16 @@
                 <span class="self-center text-2xl font-display font-bold whitespace-nowrap text-white">Aurevion<span class="text-brand-blue">Cloud</span></span>
             </a>
             
-            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <!-- 
+                PERUBAHAN PENTING: 
+                Saya menambahkan ID="authContainer" di sini agar script Firebase bisa mengganti tombol Login/Profile
+            -->
+            <div id="authContainer" class="flex md:order-2 items-center space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <!-- Isi awal (Fallback sebelum script load) -->
                 <a href="store-mc.html" class="hidden sm:inline-flex text-white bg-gradient-to-r from-brand-blue to-brand-purple hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-lg shadow-blue-500/30 transition-all hover:shadow-blue-500/50 hover:-translate-y-0.5">
                     Mulai Sekarang
                 </a>
-                <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-slate-300 rounded-lg md:hidden hover:bg-white/10 focus:outline-none" aria-controls="navbar-sticky" aria-expanded="false" id="menu-toggle">
+                <button onclick="window.toggleMenu()" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-slate-300 rounded-lg md:hidden hover:bg-white/10 focus:outline-none" aria-controls="navbar-sticky" aria-expanded="false" id="menu-toggle">
                     <span class="sr-only">Open main menu</span>
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
@@ -101,7 +106,7 @@
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-white/10 rounded-lg bg-brand-card/50 md:bg-transparent md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 backdrop-blur-xl md:backdrop-blur-none">
                     <li>
-                        <a href="#" class="block py-2 px-3 text-white bg-brand-blue/20 rounded md:bg-transparent md:text-brand-blue md:p-0" aria-current="page">Beranda</a>
+                        <a href="index.html" class="block py-2 px-3 text-white bg-brand-blue/20 rounded md:bg-transparent md:text-brand-blue md:p-0" aria-current="page">Beranda</a>
                     </li>
                     <!-- ADDED STORE LINKS -->
                     <li>
@@ -408,54 +413,52 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menu-toggle');
+    <!-- 
+        GABUNGAN SCRIPT: LOGIKA UI + FIREBASE AUTH
+    -->
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+
+        // Konfigurasi Firebase (SAMA DENGAN FILE LOGIN)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTPN4MXqk4L_zOxO1hK3bftHeehTLwB0g",
+            authDomain: "login-dae4f.firebaseapp.com",
+            projectId: "login-dae4f",
+            storageBucket: "login-dae4f.firebasestorage.app",
+            messagingSenderId: "158868098123",
+            appId: "1:158868098123:web:b58bb900fdc20c2253d1ce",
+            measurementId: "G-SB9KRM9P9K"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const authContainer = document.getElementById('authContainer');
         const navbarSticky = document.getElementById('navbar-sticky');
-        const icon = menuToggle.querySelector('i');
+        const navbar = document.getElementById('navbar');
 
-        menuToggle.addEventListener('click', () => {
+        // FUNGSI GLOBAL UNTUK TOGGLE MENU (Agar bisa dipanggil dari HTML dinamis)
+        window.toggleMenu = () => {
             navbarSticky.classList.toggle('hidden');
-            if (navbarSticky.classList.contains('hidden')) {
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
+        };
+
+        // FUNGSI LOGOUT
+        window.handleLogout = () => {
+            if(confirm('Apakah Anda yakin ingin keluar?')) {
+                signOut(auth).then(() => {
+                    window.location.reload(); 
+                }).catch((error) => {
+                    console.error('Error logout:', error);
+                    alert('Gagal keluar, coba lagi.');
+                });
             }
-        });
+        };
 
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('#navbar-sticky a').forEach(link => {
-            link.addEventListener('click', () => {
-                navbarSticky.classList.add('hidden');
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
-            });
-        });
-
-        // FAQ Accordion
-        document.querySelectorAll('.faq-toggle').forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                const icon = button.querySelector('i');
-                
-                // Toggle current
-                content.classList.toggle('hidden');
-                
-                // Rotate Icon
-                if (content.classList.contains('hidden')) {
-                    icon.style.transform = 'rotate(0deg)';
-                } else {
-                    icon.style.transform = 'rotate(180deg)';
-                }
-            });
-        });
-
-        // Navbar Blur Effect on Scroll
+        // FUNGSI SCROLL NAVBAR
         window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
             if (window.scrollY > 20) {
                 navbar.classList.add('shadow-lg');
                 navbar.classList.replace('bg-brand-dark/80', 'bg-brand-dark/95');
@@ -463,6 +466,67 @@
                 navbar.classList.remove('shadow-lg');
                 navbar.classList.replace('bg-brand-dark/95', 'bg-brand-dark/80');
             }
+        });
+
+        // LOGIKA CEK STATUS LOGIN
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // --- USER SUDAH LOGIN ---
+                const displayName = user.displayName || user.email.split('@')[0];
+                
+                // Render HTML untuk User yang Login
+                authContainer.innerHTML = `
+                    <div class="hidden md:flex items-center gap-3 mr-4">
+                        <div class="text-right">
+                            <p class="text-xs text-slate-400">Selamat Datang,</p>
+                            <p class="text-sm font-bold text-white">${displayName}</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-blue to-brand-purple flex items-center justify-center text-white font-bold shadow-lg border border-white/10">
+                            ${displayName.charAt(0).toUpperCase()}
+                        </div>
+                    </div>
+                    <button onclick="window.handleLogout()" class="hidden sm:flex text-white bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:ring-slate-700 font-medium rounded-lg text-sm px-4 py-2 transition-all items-center gap-2">
+                        <i class="fa-solid fa-right-from-bracket"></i> Keluar
+                    </button>
+                    <!-- Tombol Mobile Menu (Selalu ada) -->
+                    <button onclick="window.toggleMenu()" class="ml-2 inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-slate-300 rounded-lg md:hidden hover:bg-white/10 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                `;
+            } else {
+                // --- USER BELUM LOGIN ---
+                // Render HTML Tombol Login & Mulai Sekarang
+                authContainer.innerHTML = `
+                    <a href="login.html" class="hidden sm:inline-flex text-white bg-slate-700 hover:bg-slate-600 focus:ring-4 focus:ring-slate-700 font-medium rounded-lg text-sm px-4 py-2.5 transition-all">
+                        Login
+                    </a>
+                    <a href="store-mc.html" class="hidden sm:inline-flex text-white bg-gradient-to-r from-brand-blue to-brand-purple hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center shadow-lg shadow-blue-500/30 transition-all hover:shadow-blue-500/50 hover:-translate-y-0.5">
+                        Mulai Sekarang
+                    </a>
+                    <!-- Tombol Mobile Menu -->
+                    <button onclick="window.toggleMenu()" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-slate-300 rounded-lg md:hidden hover:bg-white/10 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                `;
+            }
+        });
+    </script>
+
+    <!-- SCRIPT TAMBAHAN (LOGIKA FAQ) -->
+    <script>
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                if (content.classList.contains('hidden')) {
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
         });
     </script>
 </body>
